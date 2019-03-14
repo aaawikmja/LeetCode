@@ -21,7 +21,7 @@ public class Solution {
             head = temp;
         }
 
-        return result.next;
+        return result;
     }
 
 
