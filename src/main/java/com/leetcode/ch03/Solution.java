@@ -40,7 +40,7 @@ public class Solution {
                 length = Math.max(length,list.size());
 
                 int index = list.indexOf(s.charAt(i));
-                list = new ArrayList<>(list.subList(index,list.size()));
+                list = list.subList(index,list.size());
                 list.remove(0);
                 list.add(s.charAt(i));
             }else{
