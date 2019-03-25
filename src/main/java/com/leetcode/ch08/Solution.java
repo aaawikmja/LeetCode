@@ -49,7 +49,7 @@ public class Solution {
 
 
 
-    public int myAtoi02(String str) {
+    public int myAtoi(String str) {
 
         if(str == null || (str = str.trim()).length() == 0) return 0;
         long result = 0;
