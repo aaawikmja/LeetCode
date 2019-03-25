@@ -47,55 +47,32 @@ package com.leetcode.ch08;
  */
 public class Solution {
 
-    public int myAtoi(String str) {
+
+
+    public int myAtoi02(String str) {
 
         if(str == null || (str = str.trim()).length() == 0) return 0;
-        boolean isNegative = false;
+        long result = 0;
+        int sign = 1;
         int index = 0;
-        StringBuilder s  = new StringBuilder();
-        if(str.charAt(0) == '-' || str.charAt(0) == '+'){
-            isNegative = str.charAt(0) == '-' ? true:false;
+        if(str.charAt(0) == '-' || str.charAt(0) == '+') {
+            sign = str.charAt(0) == '-' ? -1:1;
             index = 1;
         }
-
-        for (;index < str.length();index++){
-            char c = str.charAt(index);
-            if(Character.isDigit(c)){
-                if(s.length() == 0){
-                    if(c != '0'){
-                        s.append(c);
-                    }
-                }else {
-                    s.append(c);
+        for (; index < str.length(); index++) {
+            if(Character.isDigit(str.charAt(index))) {
+                result  = result *10 + (str.charAt(index) - '0');
+                if (result > Integer.MAX_VALUE) {
+                    break;
                 }
-                 continue;
+                continue;
             }
             break;
         }
-
-      if(s.length() == 0){
-             return  0 ;
-      }else if(s.toString().length() <String.valueOf(Integer.MAX_VALUE).length()){
-             int result = new Integer(s.toString());
-            return isNegative ? -result : result;
-       }else  if(s.toString().length()  == String.valueOf(Integer.MAX_VALUE).length()){
-
-          if(isNegative){
-              String temp = s.toString();
-              int result = temp.compareTo(String.valueOf(Integer.MIN_VALUE).substring(1,s.length() + 1));
-              return  result >= 0 ? Integer.MIN_VALUE  : -new Integer(s.toString());
-          }else {
-              String temp = s.toString();
-              int result = temp.compareTo(String.valueOf(Integer.MAX_VALUE));
-              return  result >= 0 ? Integer.MAX_VALUE : new Integer(temp);
-          }
-
-      }else {
-           return isNegative ? Integer.MIN_VALUE : Integer.MAX_VALUE;
-       }
+       result = result * sign;
+        return result >= Integer.MAX_VALUE ? Integer.MAX_VALUE : (int) Math.max(result, Integer.MIN_VALUE);
 
     }
-
 
 
 }
